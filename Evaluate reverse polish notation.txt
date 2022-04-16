@@ -1,0 +1,19 @@
+2. Evaluate reverse polish notation
+type- medium
+Solution: class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        stack=[]
+        for c in tokens:
+            if c == '+':
+                stack.append(stack.pop() + stack.pop())
+            elif c == '-':
+                x,y= stack.pop(), stack.pop()
+                stack.append(y-x)
+            elif c == '*':
+                stack.append(stack.pop() * stack.pop())
+            elif c == '/':
+                x,y= stack.pop(), stack.pop()
+                stack.append(int(y/x)) #using int to round off the result to 0
+            else:
+                stack.append(int(c)) #type conversion to int so that we can get ans in int
+        return stack[0]
